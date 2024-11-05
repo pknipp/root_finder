@@ -43,13 +43,17 @@ export default class ComplexNumber {
       return Math.sqrt(this.real * this.real + this.imag * this.imag)
     }
 
+    public get arg(): number {
+      return Math.atan2(this.imag, this.real);
+    }
+
     public get conj(): ComplexNumber {
       return new ComplexNumber(this.real, this.imag ? this.imag * -1 : 0)
     }
 
     public get sqrt(): ComplexNumber {
-        const r = Math.sqrt(Math.sqrt(this.real * this.real + this.imag * this.imag));
-        const theta = Math.atan2(this.imag, this.real) / 2;
+        const r = Math.sqrt(this.abs);
+        const theta = this.arg / 2;
         const x = r * Math.cos(theta);
         const y = r * Math.sin(theta);
         return new ComplexNumber(x, y);

@@ -22,7 +22,7 @@ export default (url: string): Result<ComplexNumber[]> => {
         if (badCoefs.length) {
             return {ok: false, error: `The following coefficient(s) is/are not parseable as a number: ${badCoefs}`};
         }
-        const coefs = stringCoefs.map(coef => Number(coef));
+        coefs = stringCoefs.map(coef => Number(coef));
         while (coefs.length && !coefs[coefs.length - 1]) coefs.pop();
         if (coefs.length <= 1) {
             return {ok: false, error: "Your polynomial needs to be linear or higher-order."}
@@ -30,7 +30,6 @@ export default (url: string): Result<ComplexNumber[]> => {
     } else {
         return {ok: false, error: "This can presently handle a Url only if in array form."}
     }
-
     const roots = zroots(coefs, true);
     return roots;
 }

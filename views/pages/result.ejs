@@ -30,7 +30,6 @@
             <li>
                 ROOTS (Complex ones occur in conjugate pairs.)
                 <br/>
-                <%= roots.map(root => `(${root.r}, ${root.i})`).join(" - ") %>
                 <table border="1">
                     <thead>
                         <tr>
@@ -41,6 +40,17 @@
                             <th>irreducible factor</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <% for (const root of roots) { %>
+                            <tr>
+                                <td><%= root.r %></td>
+                                <td><%= root.i %></td>
+                                <td><%= root.abs %></td>
+                                <td><%= root.arg %></td>
+                                <td>TBD</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
                 </table>
             </li>
             <li>
