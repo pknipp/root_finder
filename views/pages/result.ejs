@@ -5,6 +5,85 @@
     </head>
     <body>
         <%- include ("../partials/nav.ejs") %>
-        <div>Here is the url: <%= data %></div>
+        <p align=center>RESULTS</p>
+        <ul>
+            <li>
+                POLYNOMIAL
+                <br/>
+                <table border='1'>
+                    <tbody>
+                        <tr>
+                            <td>
+                                standard form
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                array form
+                            </td>
+                            <td><%= polynomial %></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li>
+                ROOTS (Complex ones occur in conjugate pairs.)
+                <br/>
+                <%= roots.map(root => `(${root.r}, ${root.i})`).join(" - ") %>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>real part</th>
+                            <th>imaginary part</th>
+                            <th>modulus</th>
+                            <th>phase</th>
+                            <th>irreducible factor</th>
+                        </tr>
+                    </thead>
+                </table>
+            </li>
+            <li>
+                VALIDITY check of roots (All numbers should be small.)
+                <br/>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>type</th>
+                            <th>real part</th>
+                            <th>imaginary part</th>
+                            <th>modulus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>based on product of roots</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>based on sum of roots</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>sum of moduli of polynomial</td>
+                            <td></td>
+                            <td>NA</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>sum of roots' imaginary parts</td>
+                            <td>NA</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+        </ul>
+
     </body>
 </html>
