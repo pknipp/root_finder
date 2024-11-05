@@ -1,8 +1,9 @@
 import ComplexNumber from './complexNumber';
 import laguer from './laguer';
+import { Result } from './result';
 
 // Translated from Fortran version in "Numerical Recipes" book.
-export default (a: number[], polish: boolean): ComplexNumber[] => {
+export default (a: number[], polish: boolean): Result<ComplexNumber[]> => {
     // Make a copy of coefficients list, for deflation.
     let ad = a.map(num => new ComplexNumber(num, 0));
     const m = a.length - 1;
@@ -11,7 +12,9 @@ export default (a: number[], polish: boolean): ComplexNumber[] => {
     for (let j = 0; j < m; j++) {
         const new_m = m - j;
         // Start nonzero, to avoid certain divide-by-zero errors.
-        const x = laguer(ad, new ComplexNumber(.001, .002), eps, false);
+        const result = laguer(ad, new ComplexNumber(.001, .002), eps, false);
+        if (!result.ok) return result;
+        const x = result.value;
         roots.push(x);
         let b = ad[new_m];
         for (let jj = new_m - 1; jj >= 0; jj--) {
@@ -24,7 +27,9 @@ export default (a: number[], polish: boolean): ComplexNumber[] => {
     if (polish) {
         const ad = a.map(coef => new ComplexNumber(coef, 0));
         for (let j = 0; j < m; j++) {
-            let root = laguer(ad, roots[j], eps, true)
+            const result = laguer(ad, roots[j], eps, true);
+            if (!result.ok) return result;
+            let root = result.value;
             if (Math.abs(root.i) <= 2 * Math.abs(root.r) * eps) {
                 root = new ComplexNumber(root.r, 0);
             }
@@ -32,5 +37,5 @@ export default (a: number[], polish: boolean): ComplexNumber[] => {
         }
     }
     roots.sort((a, b) => a.r - b.r);
-    return roots;
+    return {ok: true, value: roots};
 }

@@ -13,7 +13,9 @@ express()
   .get('/', (req, res) => res.render('pages/index'))
   .get('/:data', (req, res) => {
     const polynomial = req.params.data;
-    const roots = parseUrl(polynomial);
+    const result = parseUrl(polynomial);
+    if (!result.ok) return res.render('pages/error', {error: result.error});
+    const roots = result.value;
     res.render('pages/result', {polynomial, roots});
   })
   .listen(PORT, () => console.log(`Listening on ${PORT}`));

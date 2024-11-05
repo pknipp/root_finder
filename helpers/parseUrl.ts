@@ -1,6 +1,8 @@
+import ComplexNumber from './complexNumber';
 import zroots from './zroots';
+import { Result } from './result';
 
-export default (url: string): string => {
+export default (url: string): Result<ComplexNumber[]> => {
     // Remove spaces in order to prevent '%20' in address bar.
     url = url.replace(/\s+/g, '');
     let varName = "x";
@@ -34,11 +36,5 @@ export default (url: string): string => {
     const numericalCoefs = coefs.map(coef => Number(coef));
     // return numericalCoefs.join("-");
     const roots = zroots(numericalCoefs, true);
-    return roots.map(root => `(${root.r}, ${root.i})`).join(" - ");
+    return roots;
 }
-
-
-
-
-        // a = list(map(lambda x: float(x), coefs)) # Convert list items from strings to numbers.
-//
