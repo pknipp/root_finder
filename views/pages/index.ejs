@@ -5,6 +5,76 @@
   </head>
   <body>
     <%- include ("../partials/nav.ejs") %>
-    <div>This is the slash route.</div>
+    <h3><p align="center">Instructions for finding roots of a polynomial:</p></h3>
+    <p align="center">
+      <a href="https://pknipp.github.io/math/">
+        Return
+      </a>
+      to the Math APIs page.
+    </p>
+    <div>General:</div>
+    <ul>
+      <li>
+        <tt>json</tt> routes are WIP.
+      </li>
+      <li>
+        After <tt>...herokuapp.com</tt> above you should type <tt>/json/</tt> and then your polynomial. Input your polynomial according to one of the two formats below: "array" or "string".
+      </li>
+      <li>
+        If you want the response in html rather than in json, omit <tt>/json</tt> from the address.
+      </li>
+      <li>
+        Spaces are allowed - but discouraged - in whichever format you use, because <tt>%20</tt> will replace each space after you hit <tt>return</tt>, thereby making the address uglier.
+      </li>
+      <li>
+        The resulting page will show some "validity checks", along with the roots themselves.
+      </li>
+    </ul>
+
+    <div>Formats:</div>
+    <ol>
+      <li>array:
+        <ul>
+          <li>
+            This is a comma-separated list of coefficients, enclosed by square brackets. List the coefficients in order of increasing exponent, ie starting with the "constant" term.
+          </li>
+          <li>
+            Example: 1 + 5<i>x</i> - 4<i>x</i><sup>3</sup> would be represented by the following array: <tt>[1,5,0,-4]</tt>.
+          </li>
+        </ul>
+      </li>
+      <li>string:
+        <ul>
+          <li>
+            Each of the polynomial's coefficients may be represented as an integer or decimal but not as fraction, because a slash has special meaning in a URL. Do not include a comma in any number (even if exceeding 1000), because that will confuse the parser.
+          </li>
+          <li>
+            Your variable must be a string which starts with a letter (upper- or lowercase) or underscore. If your variable has multiple characters, they may only be letters, underscores, or digits.
+          </li>
+          <li>
+            Represent the product of a coefficient and a variable in the usual sequence: coefficient before variable, and represent the multiplication operation either by <tt>*</tt> or in an implied manner (ie with nothing separating the coefficient and the variable).
+          </li>
+          <li>
+            Represent <i>x</i><sup>2</sup> either as <tt>x**2</tt> (preferably) or <tt>x^2</tt> (OK) but not as <tt>x*x</tt>. Do likewise for larger powers.
+          </li>
+          <li>
+            You need not represent the absolute value of a coefficient if it equals 1. For instance you may type <tt>x</tt> instead of <tt>1x</tt> or <tt>1*x</tt>, or <tt>-x</tt> instead of <tt>-1x</tt> or <tt>-1*x</tt>.
+          </li>
+          <li>
+            You need not type the polynomial's terms in any particular order (such as largest power first or last).
+          </li>
+          <li>
+            You need not include any terms in the polynomial for which the coefficient is zero. For instance you may type <tt>4x**2-9</tt> instead of <tt>4x**2+0x-9</tt>.
+          </li>
+        </ul>
+      </li>
+    </ol>
+    <p align="center">
+      creator:
+      <a href="https://pknipp.github.io/" target="_blank">Peter Knipp</a>
+      <br/>
+      repo:
+      <a href="https://github.com/pknipp/root_finder" target="_blank">https://github.com/pknipp/root_finder</a>
+    </p>
   </body>
 </html>
