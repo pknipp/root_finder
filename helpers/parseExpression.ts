@@ -3,7 +3,7 @@ import isLegalStart from './isLegalStart';
 import isLegalChar from './isLegalChar';
 
 export default (url: string): Result<number[]> => {
-    
+
     if (url[0] === "+") {
         // Leading "+" is unnecessary.
         url = url.slice(1);
@@ -59,8 +59,9 @@ export default (url: string): Result<number[]> => {
     }
     // 2) Deal with list's interior terms.
     let iStr = 1;
-    while (iStr < strs.length - 1) {
-        const str = strs[iStr]
+    while (iStr < 10) { //strs.length - 1) {
+        console.log(iStr, strs.length);
+        const str = strs[iStr];
         let i = -1;
         // Seek 1st sign, which MUST exist.
         for (const sign of signs) {

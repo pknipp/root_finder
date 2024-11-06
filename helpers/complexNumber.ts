@@ -47,20 +47,11 @@ export default class ComplexNumber {
       return Math.atan2(this.imag, this.real);
     }
 
-    public get conj(): ComplexNumber {
-      return new ComplexNumber(this.real, this.imag ? this.imag * -1 : 0)
-    }
-
     public get sqrt(): ComplexNumber {
         const r = Math.sqrt(this.abs);
         const theta = this.arg / 2;
         const x = r * Math.cos(theta);
         const y = r * Math.sin(theta);
         return new ComplexNumber(x, y);
-    }
-
-    public get exp(): ComplexNumber {
-      const [r, i] = [Math.E ** this.real * Math.cos(this.imag), Math.sin(this.imag)]
-      return new ComplexNumber(r, i)
     }
   }

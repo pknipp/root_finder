@@ -1,10 +1,10 @@
 import ComplexNumber from './complexNumber';
-import zroots from './zroots';
+// import zroots from './zroots';
 import parseArray from './parseArray';
 import parseExpression from './parseExpression';
 import { Result } from './result';
 
-export default (url: string): Result<ComplexNumber[]> => {
+export default (url: string): Result<number[]> => {
     // Remove spaces in order to prevent '%20' in address bar.
     url = url.replace(/\s+/g, '');
     let varName = "x";
@@ -22,6 +22,7 @@ export default (url: string): Result<ComplexNumber[]> => {
             error: result.error,
         };
     }
-    const roots = zroots(result.value, true);
-    return roots;
+    return {ok: true, value: result.value};
+    // const roots = zroots(result.value, true);
+    // return roots;
 }

@@ -68,27 +68,19 @@
                     <tbody>
                         <tr>
                             <td>based on product of roots</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td><%= validity.prod.real %></td>
+                            <td><%= validity.prod.imag %></td>
+                            <td><%= validity.prod.abs %></td>
                         </tr>
                         <tr>
                             <td>based on sum of roots</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td><%= validity.sum.real %></td>
+                            <td><%= validity.sum.imag %></td>
+                            <td><%= validity.sum.abs %></td>
                         </tr>
                         <tr>
-                            <td>sum of moduli of polynomial</td>
-                            <td></td>
-                            <td>NA</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>sum of roots' imaginary parts</td>
-                            <td>NA</td>
-                            <td></td>
-                            <td></td>
+                            <td>sum of moduli of polynomial<br/>evaluated at roots</td>
+                            <td colspan="3"><%= validity.sumMod %></td>
                         </tr>
                     </tbody>
                 </table>
