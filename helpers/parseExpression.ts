@@ -2,7 +2,7 @@ import { Result } from './result';
 import isLegalStart from './isLegalStart';
 import isLegalChar from './isLegalChar';
 
-export default (url: string): Result<number[]> => {
+export default (url: string): Result<[number[], string]> => {
 
     if (url[0] === "+") {
         // Leading "+" is unnecessary.
@@ -60,7 +60,7 @@ export default (url: string): Result<number[]> => {
     // 2) Deal with list's interior terms.
     let iStr = 1;
     while (iStr < 10) { //strs.length - 1) {
-        console.log(iStr, strs.length);
+        // console.log(iStr, strs.length);
         const str = strs[iStr];
         let i = -1;
         // Seek 1st sign, which MUST exist.
@@ -137,5 +137,5 @@ export default (url: string): Result<number[]> => {
     for (const [exponent, coef] of coefsMap.entries()) {
         coefs[exponent] = coef;
     }
-    return {ok: true, value: coefs}
+    return {ok: true, value: [coefs, varName]}
 }

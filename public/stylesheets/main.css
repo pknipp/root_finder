@@ -13,3 +13,8 @@
     margin: 1em auto 2em; }
   .navbar + .jumbotron {
     margin-top: -20px; }
+  th, td {
+    text-align: center;
+    border: 1px solid black;
+    padding: 1px 8px;
+  }

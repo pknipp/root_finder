@@ -14,14 +14,14 @@ express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
   .get('/:data', (req, res) => {
-    const polynomial = req.params.data;
-    let parseResult = parseUrl(polynomial);
+    const url = req.params.data;
+    const parseResult = parseUrl(url);
     if (!parseResult.ok) return res.render('pages/error', {error: parseResult.error});
-    const coefs = parseResult.value;
+    const [coefs, varName] = parseResult.value;
     const rootsResult = zroots(coefs, true);
     if (!rootsResult.ok) return res.render('/pages/error', {error: rootsResult.error});
     const roots = rootsResult.value;
-    const validity = new Validity(coefs, roots);
-    res.render('pages/result', {polynomial, roots, validity});
+    const validity = new Validity(coefs, roots, varName);
+    res.render('pages/result', {validity});
   })
   .listen(PORT, () => console.log(`Listening on ${PORT}`));

@@ -1,6 +1,6 @@
 import { Result } from './result';
 
-export default (url: string): Result<number[]> => {
+export default (url: string): Result<[number[], string]> => {
     // Remove leading open-bracket which identifies this as a stringified array.
     url = url.slice(1);
     if (url.slice(-1) !== ']') {
@@ -19,5 +19,5 @@ export default (url: string): Result<number[]> => {
     if (coefs.length <= 1) {
         return {ok: false, error: "Your polynomial needs to be linear or higher-order."}
     }
-    return {ok: true, value: coefs};
+    return {ok: true, value: [coefs, "x"]};
 }
