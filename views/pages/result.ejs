@@ -46,13 +46,15 @@
                     </thead>
                     <tbody>
                         <% for (const root of validity.roots) { %>
-                            <tr>
-                                <td><%= root.r %></td>
-                                <td><%= root.i %></td>
-                                <td><%= root.abs %></td>
-                                <td><%= root.arg %></td>
-                                <td>TBD</td>
-                            </tr>
+                            <% if (root.i > -0.000000001) { %>
+                                <tr>
+                                    <td><%= root.r %></td>
+                                    <td><%= root.i %></td>
+                                    <td><%= root.abs %></td>
+                                    <td><%= root.arg %></td>
+                                    <td>TBD</td>
+                                </tr>
+                            <% } %>
                         <% } %>
                     </tbody>
                 </table>
