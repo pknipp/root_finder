@@ -59,8 +59,7 @@ export default (url: string): Result<[number[], string]> => {
     }
     // 2) Deal with list's interior terms.
     let iStr = 1;
-    while (iStr < 10) { //strs.length - 1) {
-        // console.log(iStr, strs.length);
+    while (iStr < strs.length - 1) {
         const str = strs[iStr];
         let i = -1;
         // Seek 1st sign, which MUST exist.
@@ -112,11 +111,13 @@ export default (url: string): Result<[number[], string]> => {
                 // Find the +/-, which separates exponent and coefficient.
                 const i = exponentAndCoef.indexOf(sign)
                 const exponentString = exponentAndCoef.slice(0, i);
-                let exponent = Number(exponentString);
+                const exponent = Number(exponentString);
                 if (isNaN(exponent)) {
                     return {ok: false, error: `'${exponentString}' is unparsable as a number.`};
                 }
-                exponent = Math.round(exponent);
+                if (exponent !== Math.round(exponent)) {
+                    return {ok: false, error: `The exponent ${exponent} needs to be an integer.`}
+                }
                 exponentMax = Math.max(exponentMax, exponent);
                 strs[iStr + 1] = exponentAndCoef.slice(i);
                 // Consolidate any terms which may have the same exponent.
@@ -125,12 +126,14 @@ export default (url: string): Result<[number[], string]> => {
         }
     }
     // Last string contains only the exponent, so it must be handled differently.
-    const exponentString = Math.round(Number(strs[strs.length - 1].slice(2)));
-    let exponent = Number(exponentString);
+    const exponentString = strs[strs.length - 1].slice(2);
+    const exponent = Number(exponentString);
     if (isNaN(exponent)) {
         return {ok: false, error: `'${exponentString}' is unparsable as a number.`};
     }
-    exponent = Math.round(exponent);
+    if (exponent !== Math.round(exponent)) {
+        return {ok: false, error: `The exponent ${exponent} needs to be an integer.`};
+    }
     exponentMax = Math.max(exponentMax, exponent);
     coefsMap.set(exponent, coef + (coefsMap.get(exponent) || 0));
     const coefs = Array(exponentMax + 1).fill(0);
