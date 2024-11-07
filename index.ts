@@ -24,4 +24,22 @@ express()
     const validity = new Validity(coefs, roots, varName);
     res.render('pages/result', {validity});
   })
+  .get('/json/:data', (req, res) => {
+    const url = req.params.data;
+    const parseResult = parseUrl(url);
+    if (!parseResult.ok) return res.json({"error": parseResult.error});
+    const [coefs, varName] = parseResult.value;
+    const rootsResult = zroots(coefs, true);
+    if (!rootsResult.ok) return res.json({"error": rootsResult.error});
+    const roots = rootsResult.value;
+    const validity = new Validity(coefs, roots, varName);
+    res.json({
+      "coefs": validity.coefs,
+      // "polyString": validity.polyString,
+      "roots": validity.roots,
+      "sum": validity.sum,
+      "prod": validity.prod,
+      "sumMod": validity.sumMod
+    });
+  })
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
