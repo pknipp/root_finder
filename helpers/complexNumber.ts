@@ -14,6 +14,10 @@ export default class ComplexNumber {
       return this.i
     }
 
+    public get isComplex(): boolean {
+      return Math.abs(this.i) > 0.000000001;
+    }
+
     public add(other: ComplexNumber): ComplexNumber {
       const [r, i] = [this.real + other.real, this.imag + other.imag]
       return new ComplexNumber(r, i)
@@ -53,5 +57,18 @@ export default class ComplexNumber {
         const x = r * Math.cos(theta);
         const y = r * Math.sin(theta);
         return new ComplexNumber(x, y);
+    }
+    public get irreducible(): string[] {
+      const coef = this.isComplex ? -2 * this.real : -this.real;
+      let str = coef > 0 ? " + " : coef < 0 ? " - " : "";
+      const absCoef = Math.abs(coef);
+      str += absCoef ? String(absCoef) : "";
+      const stringFrags = [str];
+      if (this.isComplex) {
+        stringFrags.push(` + ${this.abs * this.abs}`);
+      } else {
+        stringFrags.unshift("");
+      }
+      return stringFrags;
     }
   }

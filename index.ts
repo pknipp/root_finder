@@ -34,12 +34,24 @@ express()
     const roots = rootsResult.value;
     const validity = new Validity(coefs, roots, varName);
     res.json({
-      "coefs": validity.coefs,
-      // "polyString": validity.polyString,
-      "roots": validity.roots,
-      "sum": validity.sum,
-      "prod": validity.prod,
-      "sumMod": validity.sumMod
+      "coefficients": validity.coefs,
+      "roots": validity.roots.map(root => ({
+        "real": root.real,
+        "imaginary": root.imag,
+        "modulus": root.abs,
+        "argument": root.arg
+      })),
+      "validity": {
+        "sum": {
+          "real": validity.sum.real,
+          "imaginary": validity.sum.imag
+        },
+        "prod": {
+          "real": validity.prod.real,
+          "imaginary": validity.prod.imag
+        },
+        "sumMod": validity.sumMod
+      }
     });
   })
   .listen(PORT, () => console.log(`Listening on ${PORT}`));

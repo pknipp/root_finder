@@ -50,6 +50,10 @@ export default class Validity {
         }, 0);
     }
 
+    public get varName(): string {
+        return this.v;
+    }
+
     public get polyString(): string[][] {
         let str = "";
         for (let i = 0; i <= this.n; i++) {
@@ -67,7 +71,7 @@ export default class Validity {
             }
             str += addStr;
         }
-        // The following is need because EJS will not allow html injection.
+        // The following is needed because EJS will not allow html injection.
         const strArray = str.split("</sup>").map(strFrag => strFrag.split("<sup>"));
         return strArray;
     }

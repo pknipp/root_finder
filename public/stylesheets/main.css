@@ -18,3 +18,12 @@
     border: 1px solid black;
     padding: 1px 8px;
   }
+  .container {
+    padding: 10px;
+  }
+  li {
+    padding-top: 5px;
+  }
+  div {
+    padding: 5px 20px;
+  }
