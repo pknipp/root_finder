@@ -24,7 +24,7 @@ express()
     const validity = new Validity(coefs, roots, varName);
     res.render('pages/result', {validity});
   })
-  .get('/json/:data', (req, res) => {
+  .get('/api/:data', (req, res) => {
     const url = req.params.data;
     const parseResult = parseUrl(url);
     if (!parseResult.ok) return res.json({"error": parseResult.error});
