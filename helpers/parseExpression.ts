@@ -3,6 +3,7 @@ import isLegalStart from './isLegalStart';
 import isLegalChar from './isLegalChar';
 
 export default (url: string): Result<[number[], string]> => {
+    console.log("TOP OF PARSEEXPRESSION");
 
     if (url[0] === "+") {
         // Leading "+" is unnecessary.
@@ -60,6 +61,7 @@ export default (url: string): Result<[number[], string]> => {
     // 2) Deal with list's interior terms.
     let iStr = 1;
     while (iStr < strs.length - 1) {
+        console.log("iStr/strs = ", iStr, strs);
         const str = strs[iStr];
         let i = -1;
         // Seek 1st sign, which MUST exist.
