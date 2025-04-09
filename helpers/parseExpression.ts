@@ -47,6 +47,7 @@ export default (url: string): Result<[number[], string]> => {
             strs[i] = "**1" + strs[i];
         }
     }
+    console.log("line 50: strs = ", strs);
     // Ensure that any constant term is written as, e.g., 2x**0
     // # 1) Deal with leading term separately:
     const str = strs[0];
@@ -58,10 +59,10 @@ export default (url: string): Result<[number[], string]> => {
             strs.splice(1, 0, `**0${str.slice(i)}`);
         }
     }
-    console.log("strs after dealing w/first term = ", strs);
+    console.log("line 62: strs = ", strs);
     // 2) Deal with list's interior terms.
     let iStr = 1;
-    while (iStr < strs.length - 1 && iStr < 20) {
+    while (iStr < strs.length - 1) {
         console.log("iStr/strs = ", iStr, strs);
         const str = strs[iStr];
         let i = -1;
@@ -80,14 +81,9 @@ export default (url: string): Result<[number[], string]> => {
             if (iTemp !== -1) {
                 i = iTemp;
                 strs[iStr] = str.slice(0, i);
-                strs.splice(iStr + 1, 0, `**0${str.slice(i)}`); //
-            } //
-        } //
-        // py code (which works)
-                // if sign in string[i + 1:]:
-                    // i = string.index(sign, i + 1)
-                    // strs[i_str] = string[0:i]
-                    // strs.insert(i_str + 1, "**0" + string[i:])
+                strs.splice(iStr + 1, 0, `**0${str.slice(i)}`);
+            }
+        }
         iStr++;
     }
     // 3) Deal w/trailing term
