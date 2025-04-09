@@ -50,8 +50,10 @@ export default (url: string): Result<[number[], string]> => {
     const str = strs[0];
     const signs = ['+', '-'];
     for (const sign of signs) {
-        if (str.includes(sign) && str[0] !== '-') {
-            const i = str.indexOf(sign);
+        // The slice and the 2nd arg of indexOf ensures that any leading "-" is ignored.
+        // (Note that any leading "+" is stripped off, at the beginning of this helper.)
+        if (str.slice(1).includes(sign)) {
+            const i = str.indexOf(sign, 1);
             strs[0] = str.slice(0, i);
             strs.splice(1, 0, `**0${str.slice(i)}`);
         }
