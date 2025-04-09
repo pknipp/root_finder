@@ -58,6 +58,7 @@ export default (url: string): Result<[number[], string]> => {
             strs.splice(1, 0, `**0${str.slice(i)}`);
         }
     }
+    console.log("strs after dealing w/first term = ", strs);
     // 2) Deal with list's interior terms.
     let iStr = 1;
     while (iStr < strs.length - 1 && iStr < 20) {
