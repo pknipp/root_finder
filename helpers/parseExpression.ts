@@ -3,8 +3,6 @@ import isLegalStart from './isLegalStart';
 import isLegalChar from './isLegalChar';
 
 export default (url: string): Result<[number[], string]> => {
-    console.log("TOP OF PARSEEXPRESSION");
-
     if (url[0] === "+") {
         // Leading "+" is unnecessary.
         url = url.slice(1);
@@ -47,7 +45,6 @@ export default (url: string): Result<[number[], string]> => {
             strs[i] = "**1" + strs[i];
         }
     }
-    console.log("line 50: strs = ", strs);
     // Ensure that any constant term is written as, e.g., 2x**0
     // # 1) Deal with leading term separately:
     const str = strs[0];
@@ -59,11 +56,9 @@ export default (url: string): Result<[number[], string]> => {
             strs.splice(1, 0, `**0${str.slice(i)}`);
         }
     }
-    console.log("line 62: strs = ", strs);
     // 2) Deal with list's interior terms.
     let iStr = 1;
     while (iStr < strs.length - 1) {
-        console.log("iStr/strs = ", iStr, strs);
         const str = strs[iStr];
         let i = -1;
         // Seek 1st sign, which MUST exist.

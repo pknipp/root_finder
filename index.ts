@@ -18,7 +18,6 @@ express()
   .get('/', (req, res) => res.render(
     'pages/index', {baseUrl, frag1, frag2}))
   .get('/:data', (req, res) => {
-    console.log("TOP OF ROUTE HANDLER");
     const url = req.params.data;
     const parseResult = parseUrl(url);
     if (!parseResult.ok) return res.render('pages/error', {error: parseResult.error});
