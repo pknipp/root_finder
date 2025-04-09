@@ -53,7 +53,7 @@ export default (url: string): Result<[number[], string]> => {
     const str = strs[0];
     const signs = ['+', '-'];
     for (const sign of signs) {
-        if (str.includes(sign)) {
+        if (str.includes(sign) && str[0] !== '-') {
             const i = str.indexOf(sign);
             strs[0] = str.slice(0, i);
             strs.splice(1, 0, `**0${str.slice(i)}`);
