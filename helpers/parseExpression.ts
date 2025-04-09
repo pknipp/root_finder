@@ -75,12 +75,19 @@ export default (url: string): Result<[number[], string]> => {
         }
         // Seek 2nd sign, which MAY exist.
         for (const sign of signs) {
+            console.log("i/str = ", i, str);
             i = str.indexOf(sign, i + 1);
-            if (i !== -1) {
+            console.log("i = ", i);
+            if (i !== -1) { //
                 strs[iStr] = str.slice(0, i);
-                strs.splice(iStr + 1, 0, `**0${str.slice(i)}`);
-            }
-        }
+                strs.splice(iStr + 1, 0, `**0${str.slice(i)}`); //
+            } //
+        } //
+        // py code (which works)
+                // if sign in string[i + 1:]:
+                    // i = string.index(sign, i + 1)
+                    // strs[i_str] = string[0:i]
+                    // strs.insert(i_str + 1, "**0" + string[i:])
         iStr++;
     }
     // 3) Deal w/trailing term
