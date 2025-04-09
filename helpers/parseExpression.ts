@@ -76,10 +76,9 @@ export default (url: string): Result<[number[], string]> => {
         }
         // Seek 2nd sign, which MAY exist.
         for (const sign of signs) {
-            console.log("i/str = ", i, str);
-            i = str.indexOf(sign, i + 1);
-            console.log("i = ", i);
-            if (i !== -1) { //
+            const iTemp = str.indexOf(sign, i + 1);
+            if (iTemp !== -1) {
+                i = iTemp;
                 strs[iStr] = str.slice(0, i);
                 strs.splice(iStr + 1, 0, `**0${str.slice(i)}`); //
             } //
