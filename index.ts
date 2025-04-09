@@ -8,11 +8,15 @@ import Validity from './helpers/validity';
 const PORT = process.env.PORT || 5001;
 const server = express();
 
+const baseUrl = "https://ts-root-finder-0f013aa515ae.herokuapp.com";
+const frag1 = "/[1,5,0,-4]";
+const frag2 = "/1-4x**3+5x";
 express()
   .use(express.static(path.join(__dirname, '../public')))
   .set('views', path.join(__dirname, '../views'))
   .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
+  .get('/', (req, res) => res.render(
+    'pages/index', {baseUrl, frag1, frag2}))
   .get('/:data', (req, res) => {
     const url = req.params.data;
     const parseResult = parseUrl(url);
