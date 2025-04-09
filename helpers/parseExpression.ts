@@ -60,7 +60,7 @@ export default (url: string): Result<[number[], string]> => {
     }
     // 2) Deal with list's interior terms.
     let iStr = 1;
-    while (iStr < strs.length - 1) {
+    while (iStr < strs.length - 1 && iStr < 20) {
         console.log("iStr/strs = ", iStr, strs);
         const str = strs[iStr];
         let i = -1;
